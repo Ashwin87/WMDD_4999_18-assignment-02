@@ -2,9 +2,13 @@
 
 URLs for:
 Creating a recipe: https://4xlskjwrmd.execute-api.us-west-2.amazonaws.com/dev/reciepes
+
 Reading a recipe:  https://4xlskjwrmd.execute-api.us-west-2.amazonaws.com/dev/reciepes/{id}
+
 Deleting a recipe: https://4xlskjwrmd.execute-api.us-west-2.amazonaws.com/dev/reciepes/{id}
+
 Updating a recipe: https://4xlskjwrmd.execute-api.us-west-2.amazonaws.com/dev/reciepes/{id}
+
 
 Instructions to Test the API:
 
