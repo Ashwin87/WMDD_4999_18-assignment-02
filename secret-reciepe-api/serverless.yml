@@ -1,0 +1,74 @@
+
+service: secret-reciepe-api
+
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: us-west-2
+
+iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:us-west-2:*:*"
+
+functions:
+  create:
+    handler: reciepes/create.create
+    events:
+      - http:
+          path: reciepes
+          method: post
+          cors: true
+
+  get:
+    handler: reciepes/get.get
+    events:
+      - http:
+          path: reciepes/{id}
+          method: get
+          cors: true
+
+  update:
+    handler: reciepes/update.update
+    events:
+      - http:
+          path: reciepes/{id}
+          method: put
+          cors: true
+  
+  delete:
+    handler: reciepes/delete.delete
+    events:
+      - http:
+          path: reciepes/{id}
+          method: delete
+          cors: true
+
+
+
+resources:  
+  Resources:
+    reciepes:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: reciepes
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
+
+
+
